@@ -1,0 +1,38 @@
+HPPRINT is a small program to send data to a HP printer connected via
+network and a HP JetDirect card (in the printer). It can be used
+together with PRINTMON to redirect an OS/2 printer queue to the
+network connected printer. A sample usage is:
+
+	PRINTMON lpt1 "HPPRINT -h laser"
+
+where lpt1 is the port to redirect and laser is the "host name" of
+your printer. It must be defined in your hosts file or by your domain
+name server. Alternatively it can be an IP address in dotted-decimal
+notation. Optionally, the program accepts a port number with the -p
+option, it can be either a port name defined in the services file or a
+directly specified number.
+
+Note that to get your printer working you must have a bootpd server
+daemon running on some machine in the LAN and have a proper definition
+for your printer in the bootptab file. Example:
+
+  global.dummy:\
+	  :sm=255.255.255.0:\
+	  :hd=/bootpd/trypd:bf=null:\
+	  :ds=1.1.1.6:
+
+  laser.your.domain: tc=global.dummy: ht=ethernet:\
+       ha=080009568a6f: ip=1.2.3.4: hn:
+
+Please don't ask me in case of problems, there can be too many. Make
+sure you can ping your printer before attempting to use HPPRINT.
+
+The program requires the EMX runtime DLL's, get the latest emxrt.zip
+which contains it. It also requires the IBM TCP/IP 2.0 socket DLL's
+(tcp32dll.dll and so32dll.dll).
+
+This program is freeware. The author is not responsible in any way for
+any problem caused by it, even if the program is used correctly.
+
+Kai Uwe Rommel
+rommel@ars.muc.de
